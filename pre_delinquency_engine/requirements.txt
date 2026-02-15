@@ -15,7 +15,8 @@ uvicorn[standard]>=0.24.0
 
 # Dashboard
 streamlit>=1.28.0
-plotly>=5.18.0
+plotly
+
 
 # Visualization (for SHAP plots)
 matplotlib>=3.7.0
