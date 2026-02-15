@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-02-15T14:55:23.674815+00:00",
+  "feature_drift": {
+    "salary_delay_days": {
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0
+    },
+    "balance_decline_ratio_4w": {
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0
+    },
+    "utility_delay_frequency": {
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0
+    },
+    "lending_app_txn_count": {
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0
+    },
+    "failed_auto_debit_count": {
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0
+    },
+    "atm_withdrawal_spike": {
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0
+    },
+    "discretionary_spending_drop_pct": {
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0
+    }
+  },
+  "risk_score_drift": {
+    "ks_statistic": 0.0,
+    "ks_p_value": 1.0,
+    "threshold": 0.15,
+    "alert": 

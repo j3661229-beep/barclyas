@@ -1,0 +1,26 @@
+{
+  "credit_risk_framework": {
+    "PD": "model default probability (30-day)",
+    "LGD": 0.45,
+    "EAD": "3.0x monthly EMI (avg EMI=15000.0)"
+  },
+  "portfolio_expected_loss": 6658673.527576372,
+  "per_customer_EL_mean": 6658.673527576372,
+  "per_customer_EL_std": 5146.627728119443,
+  "threshold_optimization": {
+    "auc_optimized": {
+      "threshold": 0.35999999999999993,
+      "criterion": "youden",
+      "value": 0.6790300735190864
+    },
+    "loss_optimized": {
+      "threshold": 0.08,
+      "criterion": "expected_loss",
+      "value": 30177.514469775415
+    }
+  },
+  "comparison": {
+    "auc_optimized_threshold": 0.35999999999999993,
+    "loss_optimized_threshold": 0.08
+  }
+}
