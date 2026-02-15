@@ -255,9 +255,17 @@ def train_xgboost_model(
     **kwargs: Any,
 ) -> xgb.XGBClassifier:
     """Train primary XGBoost classifier. Uses XGB_HYPERPARAMS by default."""
-    params = {**XGB_HYPERPARAMS, **kwargs}
+    # Calculate scale_pos_weight from class imbalance
+    n_neg = (y_train == 0).sum()
+    n_pos = (y_train == 1).sum()
+    scale_pos_weight = float(n_neg / n_pos) if n_pos > 0 else 1.0
+    
+    # Merge hyperparameters with dynamic scale_pos_weight
+    params = {**XGB_HYPERPARAMS, "scale_pos_weight": scale_pos_weight, **kwargs}
     if random_state != RANDOM_STATE:
         params["random_state"] = random_state
+    
+    logger.info(f"Training XGBoost with scale_pos_weight={scale_pos_weight:.3f} (class ratio: {n_pos}/{n_neg})")
     model = xgb.XGBClassifier(**params)
     model.fit(X_train, y_train)
     return model
