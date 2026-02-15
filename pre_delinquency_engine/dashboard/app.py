@@ -1,6 +1,6 @@
 """
 Executive dashboard for Pre-Delinquency Intervention Engine.
-Production-grade institutional risk platform with premium UI/UX.
+PREMIUM PROFESSIONAL UI with Top Navigation Bar - World-Class Design
 """
 from __future__ import annotations
 
@@ -82,155 +82,308 @@ def _drift_signal(alert: bool, drift_stat: float | None) -> tuple[str, str]:
 def main():
     # ========== PAGE CONFIG ==========
     st.set_page_config(
-        page_title="Pre-Delinquency Intervention Engine",
+        page_title="Pre-Delinquency Engine",
         layout="wide",
-        initial_sidebar_state="expanded",
+        initial_sidebar_state="collapsed",
         page_icon="🏦"
     )
 
-    # ========== PREMIUM PRODUCTION CSS ==========
+    # ========== WORLD-CLASS PREMIUM CSS ==========
     st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700&display=swap');
     
-    /* Global Settings */
+    /* === GLOBAL RESET === */
     * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html, body, [class*="css"] {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
     /* Hide Streamlit Branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    header {visibility: hidden;}
     
-    /* Main Container Styling */
+    /* === MAIN CONTAINER === */
     .main {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        padding: 2rem 3rem;
+        background: #f8f9fc;
+        padding: 0 !important;
     }
     
-    /* Premium Header Styling */
-    .premium-header {
+    .block-container {
+        padding-top: 0 !important;
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+        max-width: 100% !important;
+    }
+    
+    /* === TOP NAVIGATION BAR === */
+    .top-navbar {
+        position: sticky;
+        top: 0;
+        z-index: 999;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2.5rem 2rem;
-        border-radius: 16px;
-        margin-bottom: 2rem;
-        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-        animation: fadeIn 0.8s ease-in;
+        padding: 0;
+        margin: 0 -3rem 2rem -3rem;
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
     }
     
-    .premium-header h1 {
+    .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 3rem;
+        max-width: 100%;
+    }
+    
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .navbar-logo {
+        font-size: 2rem;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+    
+    .navbar-title {
         color: white;
-        font-size: 2.5rem;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin: 0;
         letter-spacing: -0.5px;
+        margin: 0;
     }
     
-    .premium-header p {
+    .navbar-subtitle {
         color: rgba(255, 255, 255, 0.9);
-        font-size: 1.1rem;
-        margin-top: 0.5rem;
-        font-weight: 300;
+        font-size: 0.875rem;
+        font-weight: 400;
+        margin-top: 0.25rem;
     }
     
-    /* Metric Cards with Glassmorphism */
-    .metric-card {
-        background: rgba(255, 255, 255, 0.9);
+    .navbar-user {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: white;
+    }
+    
+    .user-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .user-info {
+        text-align: right;
+    }
+    
+    .user-name {
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+    
+    .user-role {
+        font-size: 0.75rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    /* === NAVIGATION TABS === */
+    .nav-tabs {
+        display: flex;
+        gap: 0.5rem;
+        background: white;
+        padding: 1rem 0;
+        margin: 0 -3rem 2rem -3rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        border-bottom: 2px solid #e2e8f0;
+        position: sticky;
+        top: 70px;
+        z-index: 998;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .nav-tab {
+        padding: 0.75rem 1.5rem;
+        background: transparent;
+        border: none;
+        border-radius: 8px;
+        color: #64748b;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .nav-tab:hover {
+        background: #f1f5f9;
+        color: #667eea;
+    }
+    
+    .nav-tab.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    /* === PREMIUM METRIC CARDS === */
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .metric-card {
+        background: white;
         border-radius: 16px;
-        padding: 1.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        padding: 1.75rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border: 1px solid #f1f5f9;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        margin-bottom: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
     
     .metric-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        border-color: #e2e8f0;
     }
     
-    /* Section Headers */
+    .metric-card:hover::before {
+        opacity: 1;
+    }
+    
+    /* === SECTION STYLING === */
+    .section {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border: 1px solid #f1f5f9;
+    }
+    
     .section-header {
-        color: #1a202c;
-        font-size: 1.75rem;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin: 2.5rem 0 1.5rem 0;
-        padding-bottom: 0.75rem;
-        border-bottom: 3px solid #667eea;
-        display: inline-block;
-        width: 100%;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
     }
     
-    /* Custom Metrics Styling */
+    .section-header-icon {
+        font-size: 1.75rem;
+    }
+    
+    /* === CUSTOM STREAMLIT OVERRIDES === */
     [data-testid="stMetricValue"] {
-        font-size: 2rem !important;
-        font-weight: 700 !important;
-        color: #667eea !important;
+        font-size: 2.25rem !important;
+        font-weight: 800 !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     
     [data-testid="stMetricLabel"] {
         font-size: 0.875rem !important;
         font-weight: 600 !important;
-        color: #4a5568 !important;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        color: #64748b !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        margin-bottom: 0.5rem !important;
     }
     
     [data-testid="stMetricDelta"] {
         font-size: 0.875rem !important;
+        font-weight: 600 !important;
     }
     
-    /* Info Boxes */
-    .info-box {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        padding: 1.25rem;
+    /* === ALERT BOXES === */
+    .alert {
+        padding: 1.25rem 1.5rem;
         border-radius: 12px;
-        color: white;
         margin: 1rem 0;
         font-weight: 500;
-        box-shadow: 0 8px 16px rgba(245, 87, 108, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-left: 4px solid;
     }
     
-    .success-box {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        padding: 1.25rem;
-        border-radius: 12px;
-        color: white;
-        margin: 1rem 0;
-        font-weight: 500;
-        box-shadow: 0 8px 16px rgba(79, 172, 254, 0.2);
+    .alert-success {
+        background: #f0fdf4;
+        color: #166534;
+        border-left-color: #22c55e;
     }
     
-    .warning-box {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        padding: 1.25rem;
-        border-radius: 12px;
-        color: #1a202c;
-        margin: 1rem 0;
-        font-weight: 500;
-        box-shadow: 0 8px 16px rgba(250, 112, 154, 0.2);
+    .alert-info {
+        background: #eff6ff;
+        color: #1e40af;
+        border-left-color: #3b82f6;
     }
     
-    /* Sidebar Styling */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #2d3561 0%, #1a1f3a 100%);
+    .alert-warning {
+        background: #fffbeb;
+        color: #92400e;
+        border-left-color: #f59e0b;
     }
     
-    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
-        color: white;
+    .alert-error {
+        background: #fef2f2;
+        color: #991b1b;
+        border-left-color: #ef4444;
     }
     
-    /* Button Styling */
+    /* === BUTTONS === */
     .stButton>button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         border: none;
-        border-radius: 8px;
-        padding: 0.5rem 2rem;
+        border-radius: 10px;
+        padding: 0.75rem 2rem;
         font-weight: 600;
-        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        letter-spacing: 0.3px;
     }
     
     .stButton>button:hover {
@@ -238,99 +391,103 @@ def main():
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     }
     
-    /* Dataframe Styling */
-    .dataframe {
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* === LOGIN CONTAINER === */
+    .login-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem;
     }
     
-    /* Login Container */
     .login-container {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
+        background: white;
+        border-radius: 24px;
         padding: 3rem;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        max-width: 450px;
-        margin: 5rem auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 420px;
+        width: 100%;
+        animation: slideUp 0.6s ease-out;
     }
     
-    /* Animations */
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .login-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .login-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+    
+    .login-subtitle {
+        color: #64748b;
+        font-size: 0.95rem;
+    }
+    
+    /* === DATAFRAMES === */
+    .dataframe {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        border: 1px solid #f1f5f9 !important;
+    }
+    
+    /* === ANIMATIONS === */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateX(-20px); }
-        to { opacity: 1; transform: translateX(0); }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
     
     .fade-in {
         animation: fadeIn 0.6s ease-out;
     }
-    
-    .slide-in {
-        animation: slideIn 0.6s ease-out;
-    }
-    
-    /* Status Badges */
-    .status-badge {
-        display: inline-block;
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.875rem;
-        letter-spacing: 0.5px;
-    }
-    
-    .status-high {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: white;
-    }
-    
-    .status-medium {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        color: #1a202c;
-    }
-    
-    .status-low {
-        background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
-        color: white;
-    }
-    
-    /* Card Grid */
-    .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        margin: 1.5rem 0;
-    }
     </style>
     """, unsafe_allow_html=True)
 
-    # ========== PREMIUM HEADER ==========
-    st.markdown("""
-    <div class="premium-header">
-        <h1>🏦 Pre-Delinquency Intervention Engine</h1>
-        <p>Institutional Early Warning Risk Platform · Real-Time Intelligence</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # ========== LOGIN ==========
+    # ========== SESSION STATE INITIALIZATION ==========
     if "logged_in_role" not in st.session_state:
         st.session_state.logged_in_role = None
-        
+    if "active_tab" not in st.session_state:
+        st.session_state.active_tab = "Dashboard"
+
+    # ========== LOGIN PAGE ==========
     if st.session_state.logged_in_role is None:
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            st.markdown('<div class="login-container fade-in">', unsafe_allow_html=True)
-            st.markdown("#### 🔐 Secure Login")
-            st.markdown("---")
-            with st.form("login"):
-                u = st.text_input("👤 Username", placeholder="Enter username")
-                p = st.text_input("🔑 Password", type="password", placeholder="Enter password")
+        st.markdown("""
+        <div class="login-wrapper">
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="login-logo">🏦</div>
+                    <h1 class="login-title">Welcome Back</h1>
+                    <p class="login-subtitle">Pre-Delinquency Intervention Engine</p>
+                </div>
+        """, unsafe_allow_html=True)
+        
+        with st.form("login"):
+            u = st.text_input("👤 Username", placeholder="Enter your username")
+            p = st.text_input("🔑 Password", type="password", placeholder="Enter your password")
+            
+            col1, col2 = st.columns(2)
+            with col1:
                 if st.form_submit_button("Login", use_container_width=True):
                     role = check_login(u, p)
                     if role:
@@ -339,63 +496,79 @@ def main():
                         st.rerun()
                     else:
                         st.error("❌ Invalid credentials")
-            
-            st.markdown('<div class="info-box">💡 Demo: <strong>admin/admin123</strong> or <strong>analyst/analyst123</strong></div>', unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="alert alert-info">💡 <strong>Demo Access:</strong> admin/admin123 or analyst/analyst123</div>', unsafe_allow_html=True)
+        st.markdown('</div></div>', unsafe_allow_html=True)
         st.stop()
 
-    # ========== SIDEBAR ==========
+    # ========== LOGGED IN - SHOW NAVBAR ==========
     role = st.session_state.logged_in_role
-    st.sidebar.markdown(f"""
-    <div style="text-align: center; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-        <div style="font-size: 3rem;">👤</div>
-        <div style="font-size: 1.25rem; font-weight: 600; color: white; margin-top: 0.5rem;">{st.session_state.username}</div>
-        <div style="font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 0.25rem;">{role.upper()} ACCESS</div>
+    username = st.session_state.username
+    
+    # Top Navigation Bar
+    st.markdown(f"""
+    <div class="top-navbar">
+        <div class="navbar-content">
+            <div class="navbar-brand">
+                <div class="navbar-logo">🏦</div>
+                <div>
+                    <div class="navbar-title">Pre-Delinquency Engine</div>
+                    <div class="navbar-subtitle">Institutional Risk Platform</div>
+                </div>
+            </div>
+            <div class="navbar-user">
+                <div class="user-info">
+                    <div class="user-name">{username}</div>
+                    <div class="user-role">{role} Access</div>
+                </div>
+                <div class="user-avatar">👤</div>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
+
+    # Navigation Tabs
+    tabs = ["Dashboard", "Portfolio", "Analytics", "Interventions"]
+    if role == "admin":
+        tabs.append("Admin")
     
-    if st.sidebar.button("🚪 Logout", use_container_width=True):
-        st.session_state.logged_in_role = None
-        st.rerun()
+    cols = st.columns(len(tabs) + 1)
+    for idx, tab in enumerate(tabs):
+        with cols[idx]:
+            if st.button(f"{'📊' if tab=='Dashboard' else '📈' if tab=='Portfolio' else '🧠' if tab=='Analytics' else '💼' if tab=='Interventions' else '⚙️'} {tab}", key=f"tab_{tab}", use_container_width=True):
+                st.session_state.active_tab = tab
+                st.rerun()
     
-    st.sidebar.markdown("<br>", unsafe_allow_html=True)
-    st.sidebar.markdown("### 📊 Navigation")
-    section = st.sidebar.radio(
-        "Go to section",
-        ["Executive Summary", "Portfolio Risk", "Model Insights", "Interventions", "Admin Panel" if role == "admin" else None],
-        label_visibility="collapsed"
-    )
+    with cols[-1]:
+        if st.button("🚪 Logout", key="logout", use_container_width=True):
+            st.session_state.logged_in_role = None
+            st.rerun()
+
+    # Add spacing
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # ========== LOAD DATA ==========
     full_df, feature_df = load_data()
     if full_df is None:
-        st.markdown('<div class="warning-box">⚠️ <strong>Pipeline Required:</strong> Run the pipeline first to generate data</div>', unsafe_allow_html=True)
+        st.markdown('<div class="alert alert-warning">⚠️ <strong>Pipeline Required:</strong> Run the pipeline first to generate data</div>', unsafe_allow_html=True)
         st.code("python run_pipeline.py", language="bash")
         st.stop()
 
-    # ========== EXECUTIVE SUMMARY SECTION ==========
-    if section == "Executive Summary":
-        st.markdown('<div class="section-header slide-in">📊 Executive Summary</div>', unsafe_allow_html=True)
-        
+    # ========== DASHBOARD TAB ==========
+    if st.session_state.active_tab == "Dashboard":
         # Calculate metrics
         try:
-            impact = run_business_impact(
-                feature_df=feature_df,
-                risk_scores_df=full_df[["risk_score", "risk_tier", "default_probability"]]
-            )
+            impact = run_business_impact(feature_df=feature_df, risk_scores_df=full_df[["risk_score", "risk_tier", "default_probability"]])
             s = impact["summary"]
             loss_without = s["estimated_portfolio_loss_without_system"]
             loss_prevented = s["loss_prevented_via_early_detection"]
-        except Exception:
+        except:
             loss_without = loss_prevented = 0.0
 
         try:
-            credit_report = run_credit_risk_report(
-                feature_df,
-                risk_scores_df=full_df[["risk_score", "risk_tier", "default_probability"]]
-            )
+            credit_report = run_credit_risk_report(feature_df, risk_scores_df=full_df[["risk_score", "risk_tier", "default_probability"]])
             portfolio_el = credit_report.get("portfolio_expected_loss", 0.0)
-        except Exception:
+        except:
             portfolio_el = 0.0
 
         loss_reduction_pct = (loss_prevented / loss_without * 100) if loss_without else 0.0
@@ -403,33 +576,25 @@ def main():
         try:
             metrics = load_metrics()
             auc = metrics.get("xgboost", {}).get("auc_roc", 0.0) if metrics else 0.0
-        except Exception:
+        except:
             auc = 0.0
 
         try:
             mon = run_portfolio_monitoring(full_df)
             high_risk_pct = mon.get("high_risk_pct", 0)
-        except Exception:
+        except:
             high_risk_pct = 0
 
-        # Display 4 key metrics with premium styling
+        # Key Metrics
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.markdown('<div class="metric-card fade-in">', unsafe_allow_html=True)
-            st.metric("Portfolio Expected Loss", f"₹{portfolio_el:,.0f}", delta=None)
-            st.markdown('</div>', unsafe_allow_html=True)
+            st.metric("Portfolio Expected Loss", f"₹{portfolio_el:,.0f}")
         with col2:
-            st.markdown('<div class="metric-card fade-in">', unsafe_allow_html=True)
             st.metric("Loss Reduction", f"{loss_reduction_pct:.1f}%", delta=f"{loss_reduction_pct:.1f}%")
-            st.markdown('</div>', unsafe_allow_html=True)
         with col3:
-            st.markdown('<div class="metric-card fade-in">', unsafe_allow_html=True)
-            st.metric("High Risk Portfolio", f"{high_risk_pct:.1f}%", delta=f"-{high_risk_pct:.1f}%" if high_risk_pct > 0 else "0%")
-            st.markdown('</div>', unsafe_allow_html=True)
+            st.metric("High Risk %", f"{high_risk_pct:.1f}%")
         with col4:
-            st.markdown('<div class="metric-card fade-in">', unsafe_allow_html=True)
-            st.metric("Model AUC-ROC", f"{auc:.3f}", delta="Good" if auc >= 0.75 else "Fair")
-            st.markdown('</div>', unsafe_allow_html=True)
+            st.metric("Model AUC", f"{auc:.3f}")
 
         st.markdown("<br>", unsafe_allow_html=True)
 
@@ -440,200 +605,95 @@ def main():
             ks_stat = drift_info.get("ks_statistic")
             signal, label = _drift_signal(alert, ks_stat)
             
+            st.markdown('<div class="section">', unsafe_allow_html=True)
+            st.markdown('<div class="section-header"><span class="section-header-icon">📊</span>Portfolio Status</div>', unsafe_allow_html=True)
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("📈 Portfolio Stress", f"{mon.get('portfolio_stress_index', 0):.1f}")
+                st.metric("Stress Index", f"{mon.get('portfolio_stress_index', 0):.1f}")
             with col2:
-                st.metric("🔄 Distribution Drift", f"{signal} {label}")
+                st.metric("Drift Status", f"{signal} {label}")
             with col3:
-                st.metric("🚨 Active Alerts", len(mon.get("alerts", [])))
-        except Exception:
-            st.markdown('<div class="info-box">ℹ️ Portfolio monitoring temporarily unavailable</div>', unsafe_allow_html=True)
+                st.metric("Active Alerts", len(mon.get("alerts", [])))
+            st.markdown('</div>', unsafe_allow_html=True)
+        except:
+            pass
 
-    # ========== PORTFOLIO RISK SECTION ==========
-    elif section == "Portfolio Risk":
-        st.markdown('<div class="section-header slide-in">📈 Portfolio Risk Analysis</div>', unsafe_allow_html=True)
+    # ========== PORTFOLIO TAB ==========
+    elif st.session_state.active_tab == "Portfolio":
+        st.markdown('<div class="section">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header"><span class="section-header-icon">📈</span>Risk Distribution</div>', unsafe_allow_html=True)
         
         col1, col2 = st.columns(2)
-        
-        # Left column: Risk distribution
         with col1:
             try:
-                st.markdown("#### 🎯 Risk Distribution")
                 tier_counts = full_df["risk_tier"].value_counts().reindex(["Low", "Medium", "High"], fill_value=0)
-                fig_pie = px.pie(
-                    values=tier_counts.values,
-                    names=tier_counts.index,
-                    title="Customer Risk Tiers",
-                    color_discrete_sequence=["#30cfd0", "#fa709a", "#f5576c"],
-                    hole=0.5
-                )
-                fig_pie.update_layout(
-                    plot_bgcolor='rgba(0,0,0,0)',
-                    paper_bgcolor='rgba(0,0,0,0)',
-                    font=dict(size=13, family="Inter"),
-                    showlegend=True,
-                    height=400
-                )
-                fig_pie.update_traces(textposition='inside', textinfo='percent+label')
+                fig_pie = px.pie(values=tier_counts.values, names=tier_counts.index, hole=0.5,
+                               color_discrete_sequence=["#10b981", "#f59e0b", "#ef4444"])
+                fig_pie.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', 
+                                     font=dict(family="Inter"), height=350)
                 st.plotly_chart(fig_pie, use_container_width=True)
-            except Exception:
-                st.markdown('<div class="warning-box">⚠️ Risk distribution chart unavailable</div>', unsafe_allow_html=True)
-
-        # Right column: Risk heatmap
+            except:
+                st.markdown('<div class="alert alert-error">⚠️ Chart unavailable</div>', unsafe_allow_html=True)
+        
         with col2:
             try:
-                st.markdown("#### 🔥 Risk Score Heatmap")
                 mon = run_portfolio_monitoring(full_df)
                 seg_breakdown = mon.get("segment_breakdown", [])
                 if seg_breakdown:
                     seg_df = pd.DataFrame(seg_breakdown)
                     tier_col = "risk_tier" if "risk_tier" in seg_df.columns else "index"
-                    fig_heat = px.bar(
-                        seg_df,
-                        x=tier_col,
-                        y="count",
-                        color="mean_risk_score",
-                        title="Segment Analysis",
-                        color_continuous_scale="RdYlGn_r"
-                    )
-                    fig_heat.update_layout(
-                        plot_bgcolor='rgba(0,0,0,0)',
-                        paper_bgcolor='rgba(0,0,0,0)',
-                        font=dict(family="Inter"),
-                        height=400
-                    )
-                    st.plotly_chart(fig_heat, use_container_width=True)
-                else:
-                    st.markdown('<div class="info-box">ℹ️ No segment data available</div>', unsafe_allow_html=True)
-            except Exception:
-                st.markdown('<div class="warning-box">⚠️ Heatmap unavailable</div>', unsafe_allow_html=True)
+                    fig_bar = px.bar(seg_df, x=tier_col, y="count", color="mean_risk_score", color_continuous_scale="RdYlGn_r")
+                    fig_bar.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', height=350)
+                    st.plotly_chart(fig_bar, use_container_width=True)
+            except:
+                pass
+        
+        st.markdown('</div>', unsafe_allow_html=True)
 
-        # Risk Acceleration
-        st.markdown("#### 🚀 Risk Acceleration — Top 10 Customers")
-        try:
-            velocities = []
-            for cid in full_df["customer_id"].head(200):
-                try:
-                    hist = get_risk_history(cid, days=14)
-                    if len(hist) >= 2:
-                        current_pd = full_df[full_df["customer_id"] == cid]["default_probability"].iloc[0]
-                        vel = compute_risk_velocity(current_pd, hist["pd"].tolist()[1:], 7)
-                        velocities.append({"customer_id": cid, "risk_velocity": vel})
-                except:
-                    continue
-                    
-            if velocities:
-                acc_df = pd.DataFrame(velocities).nlargest(10, "risk_velocity")
-                st.dataframe(acc_df, use_container_width=True, height=350)
-            else:
-                st.markdown('<div class="info-box">ℹ️ Risk trajectory simulation not enabled</div>', unsafe_allow_html=True)
-        except Exception:
-            st.markdown('<div class="warning-box">⚠️ Acceleration data unavailable</div>', unsafe_allow_html=True)
-
-    # ========== MODEL INSIGHTS SECTION ==========
-    elif section == "Model Insights":
-        st.markdown('<div class="section-header slide-in">🧠 Model Explainability</div>', unsafe_allow_html=True)
+    # ========== ANALYTICS TAB ==========
+    elif st.session_state.active_tab == "Analytics":
+        st.markdown('<div class="section">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header"><span class="section-header-icon">🧠</span>Model Explainability</div>', unsafe_allow_html=True)
         
         try:
             X = feature_df[FEATURE_NAMES].fillna(0)
             importance_result = run_global_explanation(X, plot_path=None)
             
-            if isinstance(importance_result, dict) and "error" in importance_result:
-                st.markdown(f'<div class="warning-box">⚠️ {importance_result["error"]}</div>', unsafe_allow_html=True)
-            else:
+            if isinstance(importance_result, dict) and "error" not in importance_result:
                 importance_df = importance_result
-                fig_bar = px.bar(
-                    importance_df.head(15),
-                    x="mean_abs_shap",
-                    y="feature",
-                    orientation="h",
-                    title="Top 15 SHAP Feature Importance",
-                    color="mean_abs_shap",
-                    color_continuous_scale="Viridis"
-                )
-                fig_bar.update_layout(
-                    yaxis={'categoryorder': 'total ascending'},
-                    plot_bgcolor='rgba(0,0,0,0)',
-                    paper_bgcolor='rgba(0,0,0,0)',
-                    font=dict(family="Inter"),
-                    height=500
-                )
-                st.plotly_chart(fig_bar, use_container_width=True)
-        except Exception:
-            st.markdown('<div class="warning-box">⚠️ Explainability temporarily unavailable</div>', unsafe_allow_html=True)
-
-        # Fairness section
-        st.markdown("#### ⚖️ Fairness & Bias Validation")
-        try:
-            fairness_path = REPORTS_DIR / "fairness_report.json"
-            if fairness_path.exists():
-                with open(fairness_path) as f:
-                    fair = json.load(f)
-                st.caption("Protected attributes not used in model — validation only")
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.markdown("**Subgroup AUC**")
-                    if fair.get("subgroup_auc"):
-                        st.dataframe(pd.DataFrame([fair["subgroup_auc"]]).T, use_container_width=True)
-                with col2:
-                    st.markdown("**Disparate Impact Ratio**")
-                    if fair.get("disparate_impact_ratio"):
-                        st.dataframe(pd.DataFrame([fair["disparate_impact_ratio"]]).T, use_container_width=True)
+                fig = px.bar(importance_df.head(15), x="mean_abs_shap", y="feature", orientation="h",
+                           color="mean_abs_shap", color_continuous_scale="Viridis")
+                fig.update_layout(yaxis={'categoryorder': 'total ascending'}, plot_bgcolor='rgba(0,0,0,0)',
+                                paper_bgcolor='rgba(0,0,0,0)', height=500)
+                st.plotly_chart(fig, use_container_width=True)
             else:
-                st.markdown('<div class="info-box">ℹ️ Run fairness validation to generate report</div>', unsafe_allow_html=True)
-        except Exception:
-            st.markdown('<div class="warning-box">⚠️ Fairness report unavailable</div>', unsafe_allow_html=True)
-
-    # ========== INTERVENTIONS SECTION ==========
-    elif section == "Interventions":
-        st.markdown('<div class="section-header slide-in">💼 Intervention Management</div>', unsafe_allow_html=True)
+                st.markdown('<div class="alert alert-warning">⚠️ Explainability temporarily unavailable</div>', unsafe_allow_html=True)
+        except:
+            st.markdown('<div class="alert alert-error">⚠️ Unable to load analytics</div>', unsafe_allow_html=True)
         
-        # ROI Summary
-        try:
-            logs = get_interventions(limit=500)
-            if logs:
-                roi_summary = portfolio_intervention_roi_summary(pd.DataFrame(logs))
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.metric("💰 Total Net Benefit", f"₹{roi_summary.get('total_net_benefit', 0):,.0f}")
-                with col2:
-                    st.metric("💸 Total Cost", f"₹{roi_summary.get('total_cost', 0):,.0f}")
-                with col3:
-                    roi_pct = (roi_summary.get("total_net_benefit", 0) / roi_summary.get("total_cost", 1) * 100) if roi_summary.get("total_cost") else 0
-                    st.metric("📊 ROI Percentage", f"{roi_pct:.0f}%")
-        except Exception:
-            pass
+        st.markdown('</div>', unsafe_allow_html=True)
 
-        # ROI by Type
-        st.markdown("#### 📋 ROI by Intervention Type")
-        try:
-            roi_by_type = roi_per_intervention_type()
-            if roi_by_type:
-                st.dataframe(pd.DataFrame(roi_by_type), use_container_width=True)
-            else:
-                st.markdown('<div class="info-box">ℹ️ No intervention data available yet</div>', unsafe_allow_html=True)
-        except Exception:
-            st.markdown('<div class="info-box">ℹ️ ROI calculation temporarily unavailable</div>', unsafe_allow_html=True)
-
-        # Intervention Logs
-        st.markdown("#### 📝 Recent Interventions")
+    # ========== INTERVENTIONS TAB ==========
+    elif st.session_state.active_tab == "Interventions":
+        st.markdown('<div class="section">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header"><span class="section-header-icon">💼</span>Intervention Management</div>', unsafe_allow_html=True)
+        
         try:
             logs = get_interventions(limit=100)
             if logs:
-                st.dataframe(pd.DataFrame(logs), use_container_width=True, height=400)
+                st.dataframe(pd.DataFrame(logs), use_container_width=True, height=500)
             else:
-                st.markdown('<div class="info-box">ℹ️ No interventions recorded yet</div>', unsafe_allow_html=True)
-        except Exception:
-            st.markdown('<div class="warning-box">⚠️ Unable to load intervention logs</div>', unsafe_allow_html=True)
-
-    # ========== ADMIN PANEL ==========
-    elif section == "Admin Panel" and role == "admin":
-        st.markdown('<div class="section-header slide-in">⚙️ Admin Panel</div>', unsafe_allow_html=True)
+                st.markdown('<div class="alert alert-info">ℹ️ No interventions recorded yet</div>', unsafe_allow_html=True)
+        except:
+            st.markdown('<div class="alert alert-error">⚠️ Unable to load interventions</div>', unsafe_allow_html=True)
         
-        # Model Performance
-        st.markdown("#### 📊 Model Performance Metrics")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # ========== ADMIN TAB ==========
+    elif st.session_state.active_tab == "Admin" and role == "admin":
+        st.markdown('<div class="section">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header"><span class="section-header-icon">⚙️</span>Admin Panel</div>', unsafe_allow_html=True)
+        
         try:
             metrics = load_metrics()
             if metrics:
@@ -647,56 +707,27 @@ def main():
                     st.metric("Recall", f"{xgb.get('recall', 0):.3f}")
                 with col4:
                     st.metric("F1-Score", f"{xgb.get('f1', 0):.3f}")
-            else:
-                st.markdown('<div class="info-box">ℹ️ Metrics not available</div>', unsafe_allow_html=True)
-        except Exception:
-            st.markdown('<div class="warning-box">⚠️ Unable to load metrics</div>', unsafe_allow_html=True)
-
+        except:
+            pass
+        
         # Trigger Intervention
         st.markdown("#### 🚨 Trigger Intervention")
         try:
             high_risk_ids = full_df[full_df["risk_tier"] == "High"]["customer_id"].tolist()
             if high_risk_ids:
-                chosen = st.selectbox(
-                    "Select High-Risk Customer",
-                    high_risk_ids[:200] if len(high_risk_ids) > 200 else high_risk_ids
-                )
+                chosen = st.selectbox("Select High-Risk Customer", high_risk_ids[:200] if len(high_risk_ids) > 200 else high_risk_ids)
                 if st.button("🚨 Trigger Intervention", type="primary"):
                     try:
                         row = feature_df[feature_df["customer_id"] == chosen][FEATURE_NAMES].fillna(0).iloc[0]
                         res = score_single(row)
                         recorded = trigger_intervention(chosen, res["risk_tier"], res["risk_score"])
-                        st.markdown(f'<div class="success-box">✅ Successfully triggered {len(recorded)} intervention(s) for customer {chosen}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div class="alert alert-success">✅ Successfully triggered {len(recorded)} intervention(s)</div>', unsafe_allow_html=True)
                     except Exception as e:
-                        st.markdown(f'<div class="warning-box">❌ Error: {str(e)}</div>', unsafe_allow_html=True)
-            else:
-                st.markdown('<div class="info-box">ℹ️ No high-risk customers currently identified</div>', unsafe_allow_html=True)
-        except Exception as e:
-            st.markdown(f'<div class="warning-box">⚠️ Intervention system unavailable: {str(e)}</div>', unsafe_allow_html=True)
-
-        # Customer Explanations
-        st.markdown("#### 🔍 Customer Risk Explanation")
-        try:
-            high_df = full_df[full_df["risk_tier"] == "High"].head(100)
-            if not high_df.empty:
-                view_id = st.selectbox("Select Customer for Explanation", high_df["customer_id"].tolist())
-                if view_id:
-                    try:
-                        model, fn = load_model_and_features()
-                        expl = local_explanation(model, feature_df, view_id, fn)
-                        
-                        if "error" in expl:
-                            st.markdown(f'<div class="warning-box">⚠️ {expl["error"]}</div>', unsafe_allow_html=True)
-                        else:
-                            st.markdown("**Top 3 Risk Factors:**")
-                            for i, f in enumerate(expl["top_3_risk_factors"], 1):
-                                st.write(f"{i}. **{f['feature']}**: SHAP = {f['shap_value']:.4f}")
-                    except Exception as e:
-                        st.markdown(f'<div class="warning-box">⚠️ Unable to generate explanation: {str(e)}</div>', unsafe_allow_html=True)
-            else:
-                st.markdown('<div class="info-box">ℹ️ No high-risk customers available for explanation</div>', unsafe_allow_html=True)
-        except Exception as e:
-            st.markdown(f'<div class="warning-box">⚠️ Explanation system unavailable: {str(e)}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div class="alert alert-error">❌ Error: {str(e)}</div>', unsafe_allow_html=True)
+        except:
+            pass
+        
+        st.markdown('</div>', unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
