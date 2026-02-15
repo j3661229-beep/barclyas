@@ -1,34 +1,34 @@
 {
   "note": "Protected attributes are not used in the model; used only for fairness reporting.",
   "subgroup_auc": {
-    "A": 0.9042337954289996,
-    "B": 0.8974214852806858
+    "A": 0.9038965904833272,
+    "B": 0.9035516054240148
   },
   "precision_recall_by_segment": {
     "A": {
-      "precision": 0.8706896551724138,
-      "recall": 0.643312101910828,
+      "precision": 0.7329545454545454,
+      "recall": 0.821656050955414,
       "count": 497
     },
     "B": {
-      "precision": 0.872,
-      "recall": 0.6337209302325582,
+      "precision": 0.73,
+      "recall": 0.8488372093023255,
       "count": 503
     }
   },
   "disparate_impact_ratio": {
     "ratio": 1.0,
     "by_segment": {
-      "A": 0.23340040241448692,
-      "B": 0.2485089463220676
+      "A": 0.35412474849094566,
+      "B": 0.3976143141153082
     },
     "favored_segment": "A"
   },
   "statistical_parity_difference": {
-    "spd": 0.01510854390758068,
+    "spd": 0.043489565624362514,
     "by_segment": {
-      "A": 0.23340040241448692,
-      "B": 0.2485089463220676
+      "A": 0.35412474849094566,
+      "B": 0.3976143141153082
     },
     "favored_segment": "A"
   }

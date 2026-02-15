@@ -1,7 +1,7 @@
 {
-  "model_version": "v1.0.0",
+  "model_version": "v1.0.1",
   "model_status": "production",
-  "training_timestamp": "2026-02-15T14:55:23.468707+00:00",
+  "training_timestamp": "2026-02-15T15:34:11.504756+00:00",
   "data_hash": "5e7d7aae8851ddc08951ef280ff93f05a77ae75deabeffb39351f0ea3721d378",
   "input_features": [
     "salary_delay_days",
@@ -32,9 +32,14 @@
   ],
   "random_state": 42,
   "xgboost_hyperparameters": {
-    "n_estimators": 100,
-    "max_depth": 5,
-    "learning_rate": 0.1,
+    "n_estimators": 200,
+    "max_depth": 6,
+    "learning_rate": 0.05,
+    "min_child_weight": 3,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "gamma": 0.1,
+    "scale_pos_weight": 1.0,
     "random_state": 42,
     "use_label_encoder": false,
     "eval_metric": "logloss"
@@ -46,26 +51,26 @@
   },
   "class_imbalance_ratio": 0.49105367793240556,
   "xgboost": {
-    "auc_roc": 0.643074912891986,
-    "precision": 0.5,
-    "recall": 0.35365853658536583,
-    "f1_score": 0.4142857142857143,
-    "f1": 0.4142857142857143,
-    "accuracy": 0.672,
-    "optimal_threshold": 0.27999999999999997,
-    "expected_loss_optimized_threshold": 0.05,
+    "auc_roc": 0.6440911730545877,
+    "precision": 0.44339622641509435,
+    "recall": 0.573170731707317,
+    "f1_score": 0.5,
+    "f1": 0.5,
+    "accuracy": 0.624,
+    "optimal_threshold": 0.43999999999999995,
+    "expected_loss_optimized_threshold": 0.06,
     "confusion_matrix": [
       [
-        139,
-        29
+        109,
+        59
       ],
       [
-        53,
-        29
+        35,
+        47
       ]
     ],
-    "cross_val_auc_mean": 0.6247505839563549,
-    "cross_val_auc_std": 0.031112777833423214
+    "cross_val_auc_mean": 0.6440944756516467,
+    "cross_val_auc_std": 0.026652230526869547
   },
   "logistic_regression": {
     "auc_roc": 0.6629645760743322,
@@ -89,8 +94,8 @@
     "cross_val_auc_std": 0.039916602993869774
   },
   "business_metrics": {
-    "avg_pd": 0.3405216634273529,
-    "portfolio_expected_loss": 1707841.4933580232,
-    "loss_reduction_vs_baseline": -0.0341003137338599
+    "avg_pd": 0.43541285395622253,
+    "portfolio_expected_loss": 2186210.618725742,
+    "loss_reduction_vs_baseline": -0.3237534604381763
   }
 }
