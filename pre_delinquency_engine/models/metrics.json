@@ -1,7 +1,7 @@
 {
-  "model_version": "v1.0.1",
+  "model_version": "v1.0.3",
   "model_status": "production",
-  "training_timestamp": "2026-02-15T15:34:11.504756+00:00",
+  "training_timestamp": "2026-02-19T10:39:45.627196+00:00",
   "data_hash": "5e7d7aae8851ddc08951ef280ff93f05a77ae75deabeffb39351f0ea3721d378",
   "input_features": [
     "salary_delay_days",
